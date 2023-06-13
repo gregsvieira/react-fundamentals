@@ -1,10 +1,16 @@
 import React from "react";
 
+const deploysOfWeek = 'Deploys of weeek';
+
+//  
 function App() {
   return (
     <>
-      <h1>Component App</h1>
-      <h2>Subtitle</h2>
+      <h1>Lauching App 🚀</h1>
+      <h1>
+        Current Number: {Math.random()}
+      </h1>
+      <h2>{deploysOfWeek}</h2>
     </>
   );
 }
