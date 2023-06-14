@@ -1,14 +1,16 @@
 import React from "react";
 import Post from './Post';
+import Header from './Header';
+
 
 function App() {
   return (
     <>
-      <h1>Lauching App 🚀</h1>
-      <h2>Deploys of weeek</h2>
-      <h3>
-        Current Number: {Math.random() * 100}
-      </h3>
+      <Header 
+        title="Lauching App 🚀"
+        subtitle="Deploys of weeek"
+        info={'Current Number:' + Math.random() * 100}
+      />
 
       <hr />
 
