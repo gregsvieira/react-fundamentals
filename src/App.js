@@ -13,6 +13,7 @@ function App() {
       <hr />
 
       <Post
+        likes={2}
         post={{
           title: 'Title 01',
           subtitle: 'Subtitle 01'
@@ -20,6 +21,7 @@ function App() {
       />
 
       <Post
+        likes={15}
         post={{
           title: 'Title 02',
           subtitle: 'Subtitle 02'
@@ -27,6 +29,7 @@ function App() {
       />
 
       <Post
+      likes={50}
         post={{
           title: 'Title 03',
           subtitle: 'Subtitle 03'
