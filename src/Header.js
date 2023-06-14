@@ -16,3 +16,7 @@ Header.propTypes = {
   subtitle: PropTypes.string.isRequired,
   children: PropTypes.node,
 }
+
+Header.defaultProps = {
+  title: `Lauching App 🚀`,
+}
