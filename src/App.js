@@ -7,7 +7,12 @@ function App() {
   return (
     <>
       <Header title="Lauching App 🚀" subtitle="Deploys of weeek">
-      <h3>{'Current Number:' + Math.random() * 100}</h3>
+        <Post
+          post={{
+            title: 'Title 01',
+            subtitle: 'Subtitle 01'
+          }}
+        />
       </Header>
 
       <hr />
