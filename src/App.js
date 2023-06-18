@@ -21,9 +21,14 @@ function App() {
       <hr />
 
       {posts.map(post => (
-      <h1 key={1} >{post.title}</h1>,
-      <h2 key={2}>{post.subtitle}</h2>,
-      <h3 key={3}>{post.likes}</h3>
+        <Post
+          key={post.title}
+          likes={post.likes}
+          post={{
+            title: post.title,
+            subtitle: post.subtitle,
+          }}
+        />
       ))}
 
     </>
