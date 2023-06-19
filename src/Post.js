@@ -8,7 +8,7 @@ function Post(props) {
         <strong>{props.post?.title}</strong><br />
         <small>{props.post?.subtitle}</small>
         <br />
-        Media: {props.likes / 2}
+        Likes: {props.likes / 2}
       </article>
       <br />
     </>
