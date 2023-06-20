@@ -2,12 +2,10 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 function Post(props) {
-  if (props.post.read) {
-    return <h4>{props.post.title} ✅</h4>
-  }
-
   return (
     <>
+    {props.post.read ? <h4>{props.post.title} ✅</h4> 
+    : <>
       <article>
         <strong>
           {props.post.read ? <s>{props.post.title}</s> : <b>{props.post.title}</b>}
@@ -25,6 +23,8 @@ function Post(props) {
         </button>
       </article>
       <br />
+    </>
+    }
     </>
   );
 }
