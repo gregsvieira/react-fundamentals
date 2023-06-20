@@ -4,11 +4,10 @@ import PropTypes from 'prop-types';
 function Post(props) {
   return (
     <>
-    {props.post.read ? <h4>{props.post.title} ✅</h4> 
-    : <>
       <article>
         <strong>
-          {props.post.read ? <s>{props.post.title}</s> : <b>{props.post.title}</b>}
+          {props.post.read && <s>{props.post.title}</s>}
+          {!props.post.read && props.post.title}
         </strong>
 
         <br />
@@ -23,8 +22,6 @@ function Post(props) {
         </button>
       </article>
       <br />
-    </>
-    }
     </>
   );
 }
