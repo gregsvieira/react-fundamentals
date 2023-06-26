@@ -2,16 +2,23 @@ import React, { useState } from "react";
 import Post from './Post';
 import Header from './Header';
 
-// const posts = ;
-
-
 function App() {
+  const [theme, setTheme] = useState('dark');
+
   const [posts, setPosts] = useState([
     { id: Math.random(), title: 'Title#01', subtitle: 'Subtitle#01', likes: 20, read: false },
     { id: Math.random(), title: 'Title#02', subtitle: 'Subtitle#02', likes: 30, read: true },
     { id: Math.random(), title: 'Title#03', subtitle: 'Subtitle#03', likes: 50, read: false },
     { id: Math.random(), title: 'Title#04', subtitle: 'Subtitle#04', likes: 25, read: true },
   ]);
+
+  function handleToggleTheme() {
+    setTheme((prevState) => (
+      prevState === 'dark'
+       ? 'light'
+       : 'dark'
+    ));
+  }
 
   function handleRefreshClean(){
     setPosts(() => []);
@@ -24,7 +31,8 @@ function App() {
           id: Math.random(),
           title: `Title#${posts.length + 1}`,
           subtitle: `Subitle#${posts.length + 1}`,
-          likes: Math.random().toFixed(2) * 100
+          likes: Math.random().toFixed(2) * 100,
+          read: false,
         }
     ]);
   }
@@ -34,17 +42,34 @@ function App() {
       prevState.filter(post => post.id !== postId)
       ))
   }
+
+  function handleMarkAsReadAndUnmarkAsUnread(postId){
+    setPosts((prevState)=> (
+      prevState.map((post) => {
+       if(post.id === postId) { 
+         return { 
+           ...post, 
+           read: post.read === true ? false : true,
+         }
+       }
+       return post;
+      })
+    ))
+  }
+
   return (
     <>
-      <Header 
-      
-      subtitle="Deploy s of weeek">
+      <Header
+        theme={theme} 
+        subtitle="Deploy s of weeek"
+        onToggleTheme={handleToggleTheme}
+      >
       <h3>
         {`Current Number: ${posts.length}`}
       </h3>
       <br/>
-      <button onClick={handleRefresh}> Atualizar </button>
-      <button onClick={handleRefreshClean}> Limpar </button>
+      <button onClick={handleRefresh}> Refresh </button>
+      <button onClick={handleRefreshClean}> Clean </button>
       </Header>
 
       <hr />
@@ -53,7 +78,9 @@ function App() {
         <Post
           key={post.id}
           onRemove={handleRemovePost}
+          onRead={handleMarkAsReadAndUnmarkAsUnread}
           post={post}
+          theme={theme}
         />
       ))}
 

@@ -1,15 +1,21 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import PostHeader from "./PostHeader";
 
 function Post(props) {
   return (
     <>
       <article>
-        <strong>
-          {props.post.read && <s>{props.post.title}</s>}
-          {!props.post.read && props.post.title}
-        </strong>
-
+        <PostHeader
+          theme={props.theme}
+          onRead={props.onRead}
+          onRemove={props.onRemove}
+          post={{
+            title: props.post.title,
+            read: props.post.read,
+            id: props.post.id
+          }}
+        />
         <br />
 
         <small>{props.post?.subtitle}</small>
@@ -17,9 +23,8 @@ function Post(props) {
         <br />
 
         Likes: {props.post?.likes / 2}
-        <button onClick={()=> props.onRemove(props.post.id)}>
-           Remover 
-        </button>
+        <br />
+        
       </article>
       <br />
     </>
@@ -29,7 +34,9 @@ function Post(props) {
 export default Post;
 
 Post.propTypes = {
+  theme: PropTypes.string.isRequired,
   onRemove: PropTypes.func.isRequired,
+  onRead: PropTypes.func.isRequired,
   post: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -37,7 +44,4 @@ Post.propTypes = {
     likes: PropTypes.number.isRequired,
     read: PropTypes.bool.isRequired,
   }).isRequired,
-  
-    
-  
 }
