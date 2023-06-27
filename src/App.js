@@ -2,6 +2,10 @@ import React, { useState, createContext } from "react";
 import Post from './Post';
 import Header from './Header';
 import { ThemeProvider, ThemeContext  } from "./ThemeContext";
+import styles from './App.css'
+
+
+
 function App() {
   const [posts, setPosts] = useState([
     { id: Math.random(), title: 'Title#01', subtitle: 'Subtitle#01', likes: 20, read: false },
@@ -49,9 +53,9 @@ function App() {
 
   return (
     <ThemeProvider>
-      <Header
-        subtitle="Deploy s of weeek"
-      >
+      <Header>
+      <h2 className={styles.title}>Deploy s of weeek</h2>
+
       <h3>
         {`Current Number: ${posts.length}`}
       </h3>
