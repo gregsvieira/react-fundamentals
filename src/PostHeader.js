@@ -10,12 +10,10 @@ export default function PostHeader(props) {
         {!props.post.read && props.post.title}
       </strong>
         <Button 
-            theme={props.theme} 
             onClick={() => props.onRemove(props.post.id)}>
           Remover
         </Button>
         <Button 
-          theme={props.theme}
           onClick={()=> props.onRead(props.post.id)}>
           {props.post.read === false ? 'Mark' : 'Unmark'}
         </Button>
@@ -24,7 +22,6 @@ export default function PostHeader(props) {
 }
 
 PostHeader.propTypes = {
-  theme: PropTypes.string.isRequired,
   onRemove: PropTypes.func.isRequired,
   onRead: PropTypes.func.isRequired,
   post: PropTypes.shape({

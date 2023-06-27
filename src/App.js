@@ -1,24 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 import Post from './Post';
 import Header from './Header';
-
+import { ThemeProvider, ThemeContext  } from "./ThemeContext";
 function App() {
-  const [theme, setTheme] = useState('dark');
-
   const [posts, setPosts] = useState([
     { id: Math.random(), title: 'Title#01', subtitle: 'Subtitle#01', likes: 20, read: false },
     { id: Math.random(), title: 'Title#02', subtitle: 'Subtitle#02', likes: 30, read: true },
     { id: Math.random(), title: 'Title#03', subtitle: 'Subtitle#03', likes: 50, read: false },
     { id: Math.random(), title: 'Title#04', subtitle: 'Subtitle#04', likes: 25, read: true },
   ]);
-
-  function handleToggleTheme() {
-    setTheme((prevState) => (
-      prevState === 'dark'
-       ? 'light'
-       : 'dark'
-    ));
-  }
 
   function handleRefreshClean(){
     setPosts(() => []);
@@ -58,11 +48,9 @@ function App() {
   }
 
   return (
-    <>
+    <ThemeProvider>
       <Header
-        theme={theme} 
         subtitle="Deploy s of weeek"
-        onToggleTheme={handleToggleTheme}
       >
       <h3>
         {`Current Number: ${posts.length}`}
@@ -80,11 +68,10 @@ function App() {
           onRemove={handleRemovePost}
           onRead={handleMarkAsReadAndUnmarkAsUnread}
           post={post}
-          theme={theme}
         />
       ))}
 
-    </>
+    </ThemeProvider>
   );
 }
 
