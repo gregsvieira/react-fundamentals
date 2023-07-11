@@ -1,9 +1,9 @@
 import React, { useState, createContext } from "react";
-import Post from './Post';
-import Header from './Header';
-import { ThemeProvider, ThemeContext  } from "./ThemeContext";
-import styles from './App.scss'
+import Post from '../Post';
+import Header from '../Header';
+import { ThemeProvider, ThemeContext  } from "../../context/ThemeContext";
 
+import { Title } from './styles';
 
 
 function App() {
@@ -59,11 +59,12 @@ function App() {
   return (
     <ThemeProvider>
       <Header>
-      <h2 className={styles.title}>Deploy s of weeek</h2>
+      <Title as="h2"> Deploy s of weeek
+      </Title>
 
-      <h3>
+      <Title as="h3">
         {`Current Number: ${posts.length}`}
-      </h3>
+      </Title>
       <br/>
       <button onClick={handleRefresh}> Refresh </button>
       <button onClick={handleRefreshClean}> Clean </button>
