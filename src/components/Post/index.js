@@ -19,10 +19,7 @@ function Post(props) {
 
         <Subtitle>{props.post?.subtitle}</Subtitle>
 
-        <br />
-
         <Rate>Likes: {props.post?.likes / 2}</Rate>
-        <br />
         
       </Container>
   );
