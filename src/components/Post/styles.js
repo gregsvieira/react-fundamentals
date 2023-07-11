@@ -1,9 +1,14 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.article`
   margin-bottom: 24px;
-  opacity: ${(props) => props.removed ? 0.5 : 1};
-  color: ${(props) => props.removed ? '#7d7d7d' : '#ebe6e6'};
+  /* opacity: ${(props) => props.removed ? 0.5 : 1};*/
+  /* color: ${(props) => props.removed ? '#7d7d7d' : '#ebe6e6'};*/
+
+  ${({ removed }) => css`
+    opacity: ${removed ? 0.5 : 1};
+    color: ${removed ? '#7d7d7d' : '#ebe6e6'};
+  `}
 `;
 
 export const Subtitle = styled.small`
