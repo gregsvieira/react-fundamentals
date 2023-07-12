@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
 export const Container = styled.article`
+  background: ${({ theme }) => theme.postBackgroundColor};
   margin-bottom: 24px;
-  background: #333;
   display: flex;
   flex-direction: column;
   padding: 16px;
@@ -19,11 +19,6 @@ export const Container = styled.article`
   & + article {
     margin-top: 8px;
   }
-
-  ${({ removed }) => css`
-    opacity: ${removed ? 0.5 : 1};
-    color: ${removed ? '#7d7d7d' : '#ebe6e6'};
-  `}
 `;
 
 export const Subtitle = styled.small`
