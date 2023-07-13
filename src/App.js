@@ -1,17 +1,17 @@
 import React, { useState, useMemo, createContext } from 'react';
 import { ThemeProvider } from 'styled-components';
 
-
 import GlobalStyle from './styles/global';
+import themes from './styles/themes/index.js';
+import useLocalStorage from './hooks/useLocalStorage';
 import Layout from './components/Layout';
 
-import themes from './styles/themes/index.js';
 
 export const AppContext = createContext();
 
 function App() {
 
-  const [theme, setTheme ] = useState('dark');
+  const [theme, setTheme] = useLocalStorage('dark');
 
   const currentTheme = useMemo(()=> {
     return themes[theme] || themes.dark;
