@@ -3,9 +3,9 @@ import { Container } from './styles'
 
 export default function FieldText({ fieldName, fieldType}) {
   return (
-    <>
-      <Container />
-      <input 
+    <> 
+    <label>{fieldName}</label>
+      <Container 
         type={fieldType} 
         placeholder={fieldName} 
       />

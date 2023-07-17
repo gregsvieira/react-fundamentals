@@ -30,9 +30,18 @@ function App() {
       firstRender.current = false
       return;
     }
-
     console.log({theme});
   }, [theme]);
+
+  useEffect(()=> {
+    function handleClick() {
+      console.log('Clicked')
+    }
+
+    document.addEventListener('click', handleClick)
+
+    return () => document.removeEventListener('click', handleClick)
+  }, [])
 
   return (
     <AppContext.Provider value={[handleToggleTheme, theme]}>
