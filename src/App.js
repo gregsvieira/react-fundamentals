@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, createContext, useRef, Component } from 'react';
+import React, { useEffect, useState, useMemo, createContext, useRef } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import GlobalStyle from './styles/global';
@@ -9,13 +9,20 @@ import Layout from './components/Layout';
 
 export const AppContext = createContext();
 
-class App extends Component {
+class App extends React.Component {
   constructor(props){
     super(props);
 
     this.state = {
       theme: 'dark',
     }
+
+    this.handleToggleTheme = this.handleToggleTheme.bind(this)
+  }
+
+  handleToggleTheme(){
+    this.setState((prevState) => ({
+      theme: prevState.theme === 'dark' ? 'light' : 'dark'}))
   }
 
   render() {
@@ -23,9 +30,7 @@ class App extends Component {
     const { theme } = this.state;
     return (
           <AppContext.Provider 
-            value={[()=> {
-            this.setState( prevState => ({theme: prevState.theme === 'dark' ? 'light' : 'dark'}))
-          }, theme]}>
+            value={[this.handleToggleTheme]}>
             <ThemeProvider theme={themes[theme] || themes.dark}>
               <GlobalStyle />
               <Layout />
