@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
+
+const PostsList = lazy(()=> import('../PostList'))
 
 import Header from '../Header';
-import PostsList from '../PostList';
+
 import Footer from '../Footer';
 import Form from '../Form';
 
@@ -10,7 +12,9 @@ export default function Layout() {
         <>
             <Header />
             <Form />
-            <PostsList />
+            <Suspense fallback={<p>Loading ...</p>}>
+                <PostsList />
+            </Suspense>
             <Footer />
         </>
     );
