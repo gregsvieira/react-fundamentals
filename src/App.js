@@ -9,48 +9,79 @@ import Layout from './components/Layout';
 
 export const AppContext = createContext();
 
-function App() {
+class App extends React.Component {
+  constructor(props){
+    super(props);
 
-  const [theme, setTheme] = useLocalStorage('dark');
-  const firstRender = useRef(true);
+    this.state = {
+      theme: 'dark',
+    }
 
-  const currentTheme = useMemo(()=> {
-    return themes[theme] || themes.dark;
-  }, [theme]);
-
-  function handleToggleTheme() {
-    setTheme(prevState => prevState === 'dark'
-    ? 'light'
-    : 'dark')
+    this.handleToggleTheme = this.handleToggleTheme.bind(this)
   }
 
-  // Don't allow useEffect executed on first render
-  useEffect(()=> {
-    if(firstRender.current) {
-      firstRender.current = false
-      return;
-    }
-    console.log({theme});
-  }, [theme]);
+  handleToggleTheme(){
+    this.setState((prevState) => ({
+      theme: prevState.theme === 'dark' ? 'light' : 'dark'}))
+  }
 
-  useEffect(()=> {
-    function handleClick() {
-      console.log('Clicked')
-    }
+  render() {
 
-    document.addEventListener('click', handleClick)
+    const { theme } = this.state;
+    return (
+          <AppContext.Provider 
+            value={[this.handleToggleTheme]}>
+            <ThemeProvider theme={themes[theme] || themes.dark}>
+              <GlobalStyle />
+              <Layout />
+            </ThemeProvider>
+          </AppContext.Provider>
+        );
+  }
+}
 
-    return () => document.removeEventListener('click', handleClick)
-  }, [])
+// function App() {
 
-  return (
-    <AppContext.Provider value={[handleToggleTheme, theme]}>
-      <ThemeProvider theme={currentTheme}>
-        <GlobalStyle />
-        <Layout />
-      </ThemeProvider>
-    </AppContext.Provider>
-  );
-};
+//   const [theme, setTheme] = useLocalStorage('dark');
+//   const firstRender = useRef(true);
+
+//   const currentTheme = useMemo(()=> {
+//     return themes[theme] || themes.dark;
+//   }, [theme]);
+
+//   function handleToggleTheme() {
+//     setTheme(prevState => prevState === 'dark'
+//     ? 'light'
+//     : 'dark')
+//   }
+
+//   // Don't allow useEffect executed on first render
+//   useEffect(()=> {
+//     if(firstRender.current) {
+//       firstRender.current = false
+//       return;
+//     }
+//     console.log({theme});
+//   }, [theme]);
+
+//   useEffect(()=> {
+//     function handleClick() {
+//       console.log('Clicked')
+//     }
+
+//     document.addEventListener('click', handleClick)
+
+//     return () => document.removeEventListener('click', handleClick)
+//   }, [])
+
+//   return (
+//     <AppContext.Provider value={[handleToggleTheme, theme]}>
+//       <ThemeProvider theme={currentTheme}>
+//         <GlobalStyle />
+//         <Layout />
+//       </ThemeProvider>
+//     </AppContext.Provider>
+//   );
+// };
 
 export default App;
