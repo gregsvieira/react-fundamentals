@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, createContext, useRef } from 'react';
+import React, { useEffect, useState, useMemo, createContext, useRef, Component } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import GlobalStyle from './styles/global';
@@ -9,48 +9,74 @@ import Layout from './components/Layout';
 
 export const AppContext = createContext();
 
-function App() {
+class App extends Component {
+  constructor(props){
+    super(props);
 
-  const [theme, setTheme] = useLocalStorage('dark');
-  const firstRender = useRef(true);
-
-  const currentTheme = useMemo(()=> {
-    return themes[theme] || themes.dark;
-  }, [theme]);
-
-  function handleToggleTheme() {
-    setTheme(prevState => prevState === 'dark'
-    ? 'light'
-    : 'dark')
+    this.state = {
+      theme: 'dark',
+    }
   }
 
-  // Don't allow useEffect executed on first render
-  useEffect(()=> {
-    if(firstRender.current) {
-      firstRender.current = false
-      return;
-    }
-    console.log({theme});
-  }, [theme]);
+  render() {
 
-  useEffect(()=> {
-    function handleClick() {
-      console.log('Clicked')
-    }
+    const { theme } = this.state;
+    return (
+          <AppContext.Provider 
+            value={[()=> {
+            this.setState( prevState => ({theme: prevState.theme === 'dark' ? 'light' : 'dark'}))
+          }, theme]}>
+            <ThemeProvider theme={themes[theme] || themes.dark}>
+              <GlobalStyle />
+              <Layout />
+            </ThemeProvider>
+          </AppContext.Provider>
+        );
+  }
+}
 
-    document.addEventListener('click', handleClick)
+// function App() {
 
-    return () => document.removeEventListener('click', handleClick)
-  }, [])
+//   const [theme, setTheme] = useLocalStorage('dark');
+//   const firstRender = useRef(true);
 
-  return (
-    <AppContext.Provider value={[handleToggleTheme, theme]}>
-      <ThemeProvider theme={currentTheme}>
-        <GlobalStyle />
-        <Layout />
-      </ThemeProvider>
-    </AppContext.Provider>
-  );
-};
+//   const currentTheme = useMemo(()=> {
+//     return themes[theme] || themes.dark;
+//   }, [theme]);
+
+//   function handleToggleTheme() {
+//     setTheme(prevState => prevState === 'dark'
+//     ? 'light'
+//     : 'dark')
+//   }
+
+//   // Don't allow useEffect executed on first render
+//   useEffect(()=> {
+//     if(firstRender.current) {
+//       firstRender.current = false
+//       return;
+//     }
+//     console.log({theme});
+//   }, [theme]);
+
+//   useEffect(()=> {
+//     function handleClick() {
+//       console.log('Clicked')
+//     }
+
+//     document.addEventListener('click', handleClick)
+
+//     return () => document.removeEventListener('click', handleClick)
+//   }, [])
+
+//   return (
+//     <AppContext.Provider value={[handleToggleTheme, theme]}>
+//       <ThemeProvider theme={currentTheme}>
+//         <GlobalStyle />
+//         <Layout />
+//       </ThemeProvider>
+//     </AppContext.Provider>
+//   );
+// };
 
 export default App;
