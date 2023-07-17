@@ -10,17 +10,12 @@ import Layout from './components/Layout';
 export const AppContext = createContext();
 
 class App extends React.Component {
-  constructor(props){
-    super(props);
-
-    this.state = {
-      theme: 'dark',
-    }
-
-    this.handleToggleTheme = this.handleToggleTheme.bind(this)
+  state = {
+    theme: 'dark',
   }
 
-  handleToggleTheme(){
+// Using arrow function inherits the "this" from the parents
+  handleToggleTheme = () => {
     this.setState((prevState) => ({
       theme: prevState.theme === 'dark' ? 'light' : 'dark'}))
   }
