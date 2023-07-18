@@ -16,19 +16,13 @@ class App extends React.Component {
 
 // Using arrow function inherits the "this" from the parents
   handleToggleTheme = () => {
-    console.log('handleTogleTheme executed');
-
-    // Method that force a execution of render without needs a modification of props or states
-    this.forceUpdate();
-    // this.setState((prevState) => ({
-    //   theme: prevState.theme === 'dark' ? 'light' : 'dark'}))
+    this.setState((prevState) => ({
+      theme: prevState.theme === 'dark' ? 'light' : 'dark'}))
   }
 
   render() {
 
     const { theme } = this.state;
-
-    console.log('<App /> rendered');
     return (
           <AppContext.Provider 
             value={[this.handleToggleTheme]}>
