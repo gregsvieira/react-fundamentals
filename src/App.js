@@ -1,36 +1,34 @@
 import React, { useEffect, useState, useMemo, createContext, useRef } from 'react';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 import GlobalStyle from './styles/global';
 import themes from './styles/themes/index.js';
 import useLocalStorage from './hooks/useLocalStorage';
 import Layout from './components/Layout';
+import { ThemeProvider, ThemeContext } from './contexts/ThemeContext';
 
 
 export const AppContext = createContext();
 
-class App extends React.Component {
-  state = {
-    theme: 'dark',
-  }
-
-// Using arrow function inherits the "this" from the parents
-  handleToggleTheme = () => {
-    this.setState((prevState) => ({
-      theme: prevState.theme === 'dark' ? 'light' : 'dark'}))
-  }
-
+class App extends React.Component { 
   render() {
-
-    const { theme } = this.state;
     return (
-          <AppContext.Provider 
-            value={[this.handleToggleTheme]}>
-            <ThemeProvider theme={themes[theme] || themes.dark}>
-              <GlobalStyle />
-              <Layout />
-            </ThemeProvider>
-          </AppContext.Provider>
+          <ThemeProvider>
+            <ThemeContext.Consumer>
+
+              {({theme, handleToggleTheme })=> (
+                console.log(theme, handleToggleTheme),
+                <StyledThemeProvider theme={themes[theme] || themes.dark}>
+                  <GlobalStyle />
+                  <Layout 
+                    onToggleTheme={handleToggleTheme} 
+                    selectedTheme={theme}
+                  />
+                </StyledThemeProvider>
+              )}
+
+            </ThemeContext.Consumer>
+          </ThemeProvider>
         );
   }
 }

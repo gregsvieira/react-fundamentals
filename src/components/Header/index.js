@@ -1,19 +1,18 @@
 import React, { useContext } from 'react';
 
 import { Container } from './styles';
+import { ThemeContext } from '../../contexts/ThemeContext';
 
-import { AppContext } from '../../App';
-
-export default function Header() {
-  const [handleToggleTheme, theme] = useContext(AppContext);
+export default function Header({onToggleTheme, selectedTheme}) {
+  // const [handleToggleTheme, theme] = useContext(ThemeContext);
 
   return (
     <Container>
       <h1>TaskListener</h1>
       <button 
         type="button" 
-        onClick={handleToggleTheme}>
-          {theme === 'dark' ? '🌚' : '🌞'}
+        onClick={onToggleTheme}>
+          {selectedTheme === 'dark' ? '🌚' : '🌞'}
       </button>
     </Container>
   );
