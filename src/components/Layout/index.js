@@ -7,22 +7,16 @@ import Header from '../Header';
 import Footer from '../Footer';
 import Form from '../Form';
 
-export default function Layout({onToggleTheme, selectedTheme}) {
+export default function Layout() {
 
     return (
         <>
-            <Header 
-                onToggleTheme={onToggleTheme}
-                selectedTheme={selectedTheme}
-            />
+            <Header />
             <Form />
             <Suspense fallback={<p>Loading ...</p>}>
                 <PostsList />
             </Suspense>
-            <Footer 
-                onToggleTheme={onToggleTheme}
-                selectedTheme={selectedTheme}
-            />
+            <Footer />
         </>
     );
 }
