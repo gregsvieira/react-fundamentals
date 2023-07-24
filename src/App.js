@@ -11,9 +11,24 @@ import { ThemeProvider, ThemeContext } from './contexts/ThemeContext';
 export const AppContext = createContext();
 
 class App extends React.Component { 
+  state = {
+    changed: false
+  }
+
+  componentDidMount() {
+    // Here we can call api's etc
+    // Same effect of useEffect(()=> {}, []); executed just one time when componenent is mounted
+    console.log('componentDidMount executed')
+  }
+
   render() {
+    console.log('rendered')
+    // Here is same effect of useEffect(()=>{}); executed all time that componenent is rendered
     return (
           <ThemeProvider>
+            <button onClick={()=> this.setState({changed: true})}>
+              Change State
+            </button>
             <ThemeContext.Consumer>
 
               {({ theme })=> (
