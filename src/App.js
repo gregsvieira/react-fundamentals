@@ -31,6 +31,11 @@ class App extends React.Component {
     })
   }
 
+  componentDidCatch(error, info) {
+    // whenever an error occurs with some children components, this component will be called 
+    console.log('from componentDidCatch: ',{ error, info })
+  }
+
   render() {
     console.log('rendered')
     // Here is same effect of useEffect(()=>{}); executed all time that componenent is rendered

@@ -11,6 +11,8 @@ export default function Layout() {
 
     return (
         <>
+            {undefined.map(item =>item )}
+            {/* forcing an error */}
             <Header />
             <Form />
             <Suspense fallback={<p>Loading ...</p>}>
