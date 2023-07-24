@@ -1,19 +1,24 @@
-import React, { useContext } from 'react';
+import React, { Component, useContext } from 'react';
 
 import { Container } from './styles';
 import { ThemeContext } from '../../contexts/ThemeContext';
 
-export default function Header({onToggleTheme, selectedTheme}) {
-  // const [handleToggleTheme, theme] = useContext(ThemeContext);
+export default class Header extends Component {
+  render(){
 
-  return (
-    <Container>
-      <h1>TaskListener</h1>
-      <button 
-        type="button" 
-        onClick={onToggleTheme}>
-          {selectedTheme === 'dark' ? '🌚' : '🌞'}
-      </button>
-    </Container>
-  );
+    return (
+      <ThemeContext.Consumer>
+        {({theme, handleToggleTheme})=> (
+          <Container>
+          <h1>TaskListener</h1>
+          <button 
+            type="button" 
+            onClick={handleToggleTheme}>
+              {theme === 'dark' ? '🌚' : '🌞'}
+          </button>
+        </Container>
+        )}
+      </ThemeContext.Consumer>
+    );
+  }
 }

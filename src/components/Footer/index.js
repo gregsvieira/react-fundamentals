@@ -5,16 +5,16 @@ import { Container } from './styles';
 import { ThemeContext } from '../../contexts/ThemeContext';
 
 
-export default function Footer({onToggleTheme, selectedTheme}) {
-    // const [handleToggleTheme, theme] = useContext(ThemeContext);
-
+export default function Footer() {
+    const { theme, handleToggleTheme } = useContext(ThemeContext);
+    
     return (
         <Container>
             <span>TaskListener. All rights reserved.</span>
             <button 
                 type="button" 
-                onClick={onToggleTheme}>
-                {selectedTheme === 'dark' ? '🌚' : '🌞'}
+                onClick={handleToggleTheme}>
+                {theme === 'dark' ? '🌚' : '🌞'}
             </button>
         </Container>
     )
