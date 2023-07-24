@@ -60,7 +60,8 @@ class App extends React.Component {
               {({ theme })=> (
                 <StyledThemeProvider theme={themes[theme] || themes.dark}>
                   <GlobalStyle />
-                  <Layout />
+                  {theme === 'dark' && <Layout />}
+                  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                 </StyledThemeProvider>
               )}
 
