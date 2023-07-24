@@ -52,14 +52,13 @@ class App extends React.Component {
     // Here is same effect of useEffect(()=>{}); executed all time that componenent is rendered
     return (
           <ThemeProvider>
-            <button onClick={()=> this.setState({changed: true})}>
-              Change State
-            </button>
             <ThemeContext.Consumer>
-
-              {({ theme })=> (
+              {({ theme, handleToggleTheme })=> (
                 <StyledThemeProvider theme={themes[theme] || themes.dark}>
                   <GlobalStyle />
+                  <button onClick={handleToggleTheme}>
+                    Change State
+                  </button>
                   {theme === 'dark' && <Layout />}
                   <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                 </StyledThemeProvider>

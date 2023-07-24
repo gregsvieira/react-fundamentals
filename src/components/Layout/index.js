@@ -9,13 +9,14 @@ import Form from '../Form';
 
 export default class Layout extends React.Component {
     componentDidMount() {
+        console.log('Component did mount')
         document.addEventListener('scroll', this.handleScroll)
     }
 
     componentWillUnmount() {
         // executed before component leave render
         // this example permit show that handleScroll don't execute when component don't appears
-        console.log('The component will be disassembled')
+        console.log('Component did unmount')
         document.removeEventListener('scroll', this.handleScroll)
       }
 
