@@ -24,7 +24,7 @@ class App extends React.Component {
   componentDidUpdate(prevProps,prevState) {
     // to monitor if some variable value is changed
     // executed just after method render and just if we have a change of props or state
-    console.log({
+    console.log('componentDidUpdate ',{
       currentState: this.state,
       prevState,
       prevProps,
@@ -33,7 +33,18 @@ class App extends React.Component {
 
   componentDidCatch(error, info) {
     // whenever an error occurs with some children components, this component will be called 
-    console.log('from componentDidCatch: ',{ error, info })
+    console.log('componentDidCatch: ',{ error, info })
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // executed right before method rendering and only if we have a props or state change. the opposite of componentDidUpdate
+    console.log('shouldComponentUpdate ', {
+      currentState: this.state,
+      nextState,
+      nextProps,
+    })
+
+    return true; // if want don't render can set false, and component don't update on render
   }
 
   render() {

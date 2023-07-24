@@ -11,7 +11,7 @@ export default function Layout() {
 
     return (
         <>
-            {undefined.map(item =>item )}
+            {/* {undefined.map(item =>item )} */}
             {/* forcing an error */}
             <Header />
             <Form />
