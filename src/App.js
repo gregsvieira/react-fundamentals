@@ -21,6 +21,16 @@ class App extends React.Component {
     console.log('componentDidMount executed')
   }
 
+  componentDidUpdate(prevProps,prevState) {
+    // to monitor if some variable value is changed
+    // executed just after method render and just if we have a change of props or state
+    console.log({
+      currentState: this.state,
+      prevState,
+      prevProps,
+    })
+  }
+
   render() {
     console.log('rendered')
     // Here is same effect of useEffect(()=>{}); executed all time that componenent is rendered
