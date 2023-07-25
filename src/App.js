@@ -56,11 +56,7 @@ class App extends React.Component {
               {({ theme, handleToggleTheme })=> (
                 <StyledThemeProvider theme={themes[theme] || themes.dark}>
                   <GlobalStyle />
-                  <button onClick={handleToggleTheme}>
-                    Change State
-                  </button>
-                  {theme === 'dark' && <Layout />}
-                  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                  <Layout />
                 </StyledThemeProvider>
               )}
 
