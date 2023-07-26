@@ -7,6 +7,7 @@ export class ThemeProvider extends React.Component {
     super(props)
     
     let theme = 'dark';
+    let rendered = 0;
 
     try {
       theme = JSON.parse(localStorage.getItem('theme'))
@@ -16,19 +17,35 @@ export class ThemeProvider extends React.Component {
     
     this.state = {
       theme,
+      rendered,
     };
   }
 
+  // Using to monitor the value change after render
+  componentDidUpdate(prevProps, prevState) {
+    // comparing to know if value changed
+    if (prevState.theme !== this.state.theme){
+      localStorage.setItem('theme', JSON.stringify(this.state.theme))
+      console.log('theme changed');
+    }
+  }
 
   handleToggleTheme = () => {
         this.setState(prevState => ({
           theme: prevState.theme === 'dark' ? 'light' : 'dark'
-        }), () => {
-          localStorage.setItem('theme', JSON.stringify(this.state.theme))
-        })
+        }))
       }
 
+  reRender = () => {
+    this.setState((prevState) => ({
+      rendered: prevState.rendered + 1,
+    }));
+  };
+
   render() {
+    console.log(`Rendered`);
+   
+
     return (
         <ThemeContext.Provider 
           value={{ 
@@ -36,6 +53,7 @@ export class ThemeProvider extends React.Component {
             handleToggleTheme: this.handleToggleTheme,
           }}
         >
+          <button onClick={this.reRender}>Rendered: {this.state.rendered}</button>
           {this.props.children}
         </ThemeContext.Provider>
       )
