@@ -1,24 +1,42 @@
-import React, { Component, useContext } from 'react';
+import React, { useContext } from 'react';
 
 import { Container } from './styles';
 import { ThemeContext } from '../../contexts/ThemeContext';
 
-export default class Header extends Component {
-  render(){
+function HOC(ComponentHeader) {
+  return class Component extends React.Component {
+    render() {
+      return(
+        <ThemeContext.Consumer>
+        {(value) => (
+          <ComponentHeader {...value} />
+        )}
+      </ThemeContext.Consumer>
+      )
+    }
+  }
+}
 
+class Header extends React.Component {
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.theme !== prevProps.theme) {
+      console.log('theme is changed')
+    }
+  }
+
+  render(){
     return (
-      <ThemeContext.Consumer>
-        {({theme, handleToggleTheme})=> (
-          <Container>
+        <Container>
           <h1>TaskListener</h1>
           <button 
             type="button" 
-            onClick={handleToggleTheme}>
-              {theme === 'dark' ? '🌚' : '🌞'}
+            onClick={this.props.handleToggleTheme}
+            >
+              {this.props.theme === 'dark' ? '🌚' : '🌞'}
           </button>
         </Container>
-        )}
-      </ThemeContext.Consumer>
     );
   }
 }
+
+export default HOC(Header);
