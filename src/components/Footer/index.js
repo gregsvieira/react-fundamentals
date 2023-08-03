@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 
 import { Container } from './styles';
 
-import { ThemeContext } from '../../contexts/ThemeContext';
+import { AppContext } from '../../App';
 
 
 export default function Footer() {
-    const { theme, handleToggleTheme } = useContext(ThemeContext);
-    
+    const [handleToggleTheme, theme] = useContext(AppContext);
+
     return (
         <Container>
             <span>TaskListener. All rights reserved.</span>

@@ -1,55 +1,24 @@
-import React, { Suspense, lazy } from 'react';
-
-const PostsList = lazy(()=> import('../PostList'))
+import React from 'react';
+import { BrowserRouter, Link } from 'react-router-dom';
 
 import Header from '../Header';
-
 import Footer from '../Footer';
-import Form from '../Form';
 
-export default class Layout extends React.Component {
-    componentDidMount() {
-        console.log('Component did mount')
-        document.addEventListener('scroll', this.handleScroll)
-    }
+import Routes from '../../Routes';
 
-    componentWillUnmount() {
-        // executed before component leave render
-        // this example permit show that handleScroll don't execute when component don't appears
-        console.log('Component did unmount')
-        document.removeEventListener('scroll', this.handleScroll)
-      }
+export default function Layout() {
 
-    handleScroll = () => {
-        console.log('Scrolled')
-    }
+    return (
+        <BrowserRouter>
+            <Header />
+                <nav>
+                    <Link to="/"> Home </Link>
+                    <Link to="/posts"> Posts </Link>
+                    <Link to="/publish"> Publish </Link>
+                </nav>
 
-    render() {
-        return (
-            <>
-                <Header />
-                <Form />
-                <Suspense fallback={<p>Loading ...</p>}>
-                    <PostsList />
-                </Suspense>
-                <Footer />
-            </>
-        );
-    }
+            <Routes />
+            <Footer />
+        </BrowserRouter>
+    );
 }
-
-// export default function Layout() {
-
-//     return (
-//         <>
-//             {/* {undefined.map(item =>item )} */}
-//             {/* forcing an error */}
-//             <Header />
-//             <Form />
-//             <Suspense fallback={<p>Loading ...</p>}>
-//                 <PostsList />
-//             </Suspense>
-//             <Footer />
-//         </>
-//     );
-// }
