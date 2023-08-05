@@ -16,6 +16,7 @@ export default function Layout() {
                 <Nav>
                     <Link to="/"> Home </Link>
                     <Link to="/posts"> Posts </Link>
+                    <Link to="/posts/12313"> Last Post </Link>
                     <Link to="/publish"> Publish </Link>
                 </Nav>
 
