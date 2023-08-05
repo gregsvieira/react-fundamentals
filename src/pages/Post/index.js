@@ -1,41 +1,34 @@
 import React, { useMemo } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useHistory } from "react-router-dom";
 
-// export default function Post(){
+export default function Post(){
 
-//   const { id } = useParams();
-//   const { search } = useLocation();
+  const { id } = useParams();
+  const { search } = useLocation();
+  const history = useHistory();
   
-//   const queryParams = useMemo(() => new URLSearchParams(search), [search])
-  
-//   return(
-//     <>
-//       <h1>Post Page: {id} </h1>
-//       <h2>Search: {queryParams.get('myQueryParam')}</h2>
-//     </>
-//   )
-// }
+  const queryParams = useMemo(() => new URLSearchParams(search), [search])
 
-
-export default class Post extends React.Component{
-  constructor(props){
-    super(props);
-    this.paramId = this.props.match.params.id;
-
-    const { search } = this.props.location;
-    this.queryParams = new URLSearchParams(search);
+  function handleNavigate(){
+    history.push('/posts')
   }
 
-  render() {
-    console.log(this.queryParams.get('myQueryParam'));
-
-    return (
-      <>
-        <h1>Post Page: {this.paramId}</h1>
-        <h2>
-          Search: {this.queryParams.get('myQueryParam')}
-        </h2>
-      </>
-    )
-  }
+  return(
+    <>
+      <h1>Post Page: {id} </h1>
+      <h2>Search: {queryParams.get('myQueryParam')}</h2>
+      <button 
+        onClick={handleNavigate} 
+        style={{ 
+          backgroundColor: '#000',
+          color: '#fff',
+          width: '120px',
+          height: '30px',
+          borderRadius: '4px'
+        }} 
+      > 
+        Back to Posts list
+      </button>
+    </>
+  )
 }
