@@ -21,7 +21,7 @@ export default function Layout() {
                 </Nav>
 
             <Routes />
-            <Footer />
+            {/* <Footer /> */}
         </BrowserRouter>
     );
 }
