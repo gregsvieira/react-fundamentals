@@ -1,42 +1,28 @@
 import React, { useContext } from 'react';
+import { useHistory } from "react-router-dom";
 
 import { Container } from './styles';
-import { ThemeContext } from '../../contexts/ThemeContext';
 
-function HOC(ComponentHeader) {
-  return class Component extends React.Component {
-    render() {
-      return(
-        <ThemeContext.Consumer>
-        {(value) => (
-          <ComponentHeader {...value} />
-        )}
-      </ThemeContext.Consumer>
-      )
-    }
+import { AppContext } from '../../App';
+
+export default function Header() {
+  const [handleToggleTheme, theme] = useContext(AppContext);
+
+  const history = useHistory();
+
+  function handleNavigate(){
+    history.push('/')
   }
+
+  return (
+    <Container>
+      <h1>TaskListener</h1>
+      <button onClick={handleNavigate} style={{ color: '#fff'}}>Return to home page</button>
+      <button 
+        type="button" 
+        onClick={handleToggleTheme}>
+          {theme === 'dark' ? '🌚' : '🌞'}
+      </button>
+    </Container>
+  );
 }
-
-class Header extends React.Component {
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.theme !== prevProps.theme) {
-      console.log('theme is changed')
-    }
-  }
-
-  render(){
-    return (
-        <Container>
-          <h1>TaskListener</h1>
-          <button 
-            type="button" 
-            onClick={this.props.handleToggleTheme}
-            >
-              {this.props.theme === 'dark' ? '🌚' : '🌞'}
-          </button>
-        </Container>
-    );
-  }
-}
-
-export default HOC(Header);
